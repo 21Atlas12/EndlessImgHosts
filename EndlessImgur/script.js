@@ -148,11 +148,6 @@ async function getNewImage() {
                         notify()
                     }
             }
-            if (data.startsWith("@")) {
-
-            } else {
-
-            }
         })
         pool.push(newWorker)
     }
