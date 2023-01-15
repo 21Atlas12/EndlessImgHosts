@@ -101,7 +101,6 @@ function setup() {
 
 //#region fetching images
 var idLen = 5;
-var rigged = 2
 
 async function getNewImage() {
     disableControls(true)
@@ -134,13 +133,6 @@ async function getNewImage() {
                     pool.forEach((worker) => {
                         worker.terminate()
                     })
-                    if (rigged == 2) {
-                        rigged = 1
-                        data = "5ST5bP7;mp4"
-                    } else if (rigged == 1) {
-                        rigged = 0
-                        data = "N8O0Cjh;mp4"
-                    }
 
                     var contentInfo = data.split(";")
 
