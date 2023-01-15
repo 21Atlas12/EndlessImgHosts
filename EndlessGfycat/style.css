@@ -183,6 +183,10 @@ p {
     margin-right: auto;
 }
 
+#currentVideo {
+    max-width: 100%;
+}
+
 #footer {
     display: flex;
     flex-direction: row;

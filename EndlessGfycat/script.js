@@ -128,13 +128,14 @@ async function getNewImage() {
                     disableControls(false)
                     label.innerHTML = "click to copy"
                     if (mp4Only) {
-
-                    }
-                    if (contentInfo[1] == "mp4") {
                         pushVideo(contentInfo[0])
                     } else {
-                        pushImage(contentInfo[0])
-                    }                   
+                        if (contentInfo[1] == "mp4") {
+                            pushVideo(contentInfo[0])
+                        } else {
+                            pushImage(contentInfo[0])
+                        }     
+                    }              
 
                     if (playNotif) {
                         notify()
