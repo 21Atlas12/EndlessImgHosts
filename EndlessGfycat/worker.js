@@ -67,7 +67,7 @@ function testUrl(url) {
             response.text()
             .then(data => {
                 var respData = JSON.parse(data)
-                if (respData.hasAudio == true) {
+                if (respData.gfyItem.hasAudio == true) {
                     resolve("mp4")
                 } else {
                     resolve("gif")

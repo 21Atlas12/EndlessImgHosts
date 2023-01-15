@@ -153,7 +153,7 @@ function getUrl(id, mime, asThumbnail) {
         return "https://thumbs.gfycat.com/" + id + "-poster.jpg"
     }
     if (mime == "mp4") {
-        return "https://zippy.gfycat.com/"+ id + ".mp4"
+        return "https://giant.gfycat.com/"+ id + ".mp4"
     }
     
     return "https://thumbs.gfycat.com/" + id + "-size_restricted.gif"
