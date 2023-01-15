@@ -167,6 +167,14 @@ p {
     scrollbar-width: thin;
 }
 
+.historyImage {
+    min-width: 90px;
+    max-width: 90px;
+
+    min-height: 90px;
+    max-height: 90px;
+}
+
 #currentContent {
     padding-bottom: 30px;
     margin-left: auto;
