@@ -2,6 +2,7 @@ const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 var imgHolder = null
 var vidHolder = null
 var currentId = ""
+var currentMime = ""
 
 function setup() {
 
@@ -138,11 +139,7 @@ async function getNewImage() {
 
                     disableControls(false)
                     label.innerHTML = "click to copy"
-                    if (contentInfo[1] == "mp4") {
-                        pushVideo(contentInfo[0])
-                    } else {
-                        pushImage(contentInfo[0])
-                    }                   
+                    pushContent(contentInfo[0], contentInfo[1])         
 
                     if (playNotif) {
                         notify()
@@ -161,7 +158,12 @@ function getUrl(id, mime, asThumbnail) {
     if (asThumbnail) {
         url = url + "s"
     }
-    return url + "." + mime
+    if (mime) {
+        return url + "." + mime
+    } 
+
+    return url
+    
 }
 
 //#endregion
@@ -205,25 +207,23 @@ const scalingTypes = {
 }
 var currentScaling = scalingTypes.fit
 
-function pushImage(imgId) {
-    var idLabel = document.getElementById("idLabel")
-    currentId = imgId
+function pushContent(id, mime) {
+    currentId = id
+    currentMime = mime
     idLabel.innerHTML = "ID: " + currentId
-    vidHolder.style.display = "none"
-    vidHolder.pause()    
-    imgHolder.setAttribute("src", getUrl(currentId, "png")) 
-    imgHolder.style.display = ""
-    pushHistory(imgId, "png")   
-}
 
-function pushVideo(videoId) {
-    var idLabel = document.getElementById("idLabel")
-    currentId = videoId
-    idLabel.innerHTML = "ID: " + currentId    
-    imgHolder.style.display = "none"
-    vidHolder.setAttribute("src", getUrl(currentId, "mp4")) 
-    vidHolder.style.display = ""
-    pushHistory(videoId, "mp4")
+    if(currentMime == "mp4") {
+        imgHolder.style.display = "none"
+        vidHolder.setAttribute("src", getUrl(currentId, "mp4")) 
+        vidHolder.style.display = ""
+    } else {
+        vidHolder.style.display = "none"
+        vidHolder.pause()    
+        imgHolder.setAttribute("src", getUrl(currentId, "png")) 
+        imgHolder.style.display = ""
+    }
+
+    pushHistory(currentId, currentMime)
 }
 
 function pushHistory(id, mime) {
@@ -263,11 +263,7 @@ const historyBuffer = []
 function loadHistory(historyIndex) {
     var contentdata = historyBuffer[historyIndex].split(";")
     historyBuffer.splice(historyIndex, 1)
-    if (contentdata[1] == "mp4") {
-        pushVideo(contentdata[0])
-    } else {
-        pushImage(contentdata[0])
-    }    
+    pushContent(contentdata[0], contentdata[1])   
 }
 
 function renderHistory() {
@@ -397,9 +393,10 @@ function copyCurrentUrl() {
     if (!controlsDisabled) {
         var label = document.getElementById("copyPrompt")
         var success = true
+        var urlToCopy = getUrl(currentId, currentMime)
 
         try {
-            navigator.clipboard.writeText(getUrl(currentId))
+            navigator.clipboard.writeText(urlToCopy)
             label.style.color = "greenyellow"
             label.innerHTML = "copied!"
         } catch (error) {
