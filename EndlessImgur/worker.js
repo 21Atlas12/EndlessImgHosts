@@ -73,6 +73,12 @@ function testUrl(url) {
         xhr.open('HEAD', url, true);
 
         xhr.onreadystatechange = async function () {
+            if (xhr.status == "403" || xhr.status == "401" || xhr.status == "429") {
+                sendErrorMsg("Imgur is unreachable, you may have been rate limited. Try changing your IP")
+                self.close()
+                return
+            }
+
             if (xhr.responseURL != "https://i.imgur.com/removed.png" && xhr.status == "200") {
                 resolve()
             } else {

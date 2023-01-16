@@ -60,6 +60,11 @@ function testUrl(url) {
         fetch(url)
         .then(response => {
             if (response.status != 200) {
+                if (response.status == "403" || response.status == "401" || response.status == "429") {
+                    sendErrorMsg("Gfycat is unreachable, you may have been rate limited. Try changing your IP")
+                    self.close()
+                    return
+                }
                 reject()
                 return
             }
