@@ -415,6 +415,11 @@ function copyCurrentUrl() {
 }
 
 function reportImage() {
+    if (currentId == "") {
+        alert("No image to report")
+        return
+    }
+    
     var response = confirm("Are you sure you want to report this image? If you press \"OK\" the current images URL will be copied to your clipboard, and you will be redirected to imgurs removal request page.")
 
     if (response) {

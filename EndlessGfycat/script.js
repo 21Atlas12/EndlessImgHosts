@@ -153,6 +153,9 @@ function getUrl(id, mime, asThumbnail) {
     if (mime == "mp4") {
         return "https://giant.gfycat.com/"+ id + ".mp4"
     }
+    if (mime == "page") {
+        return "https://gfycat.com/" + id
+    }
     
     return "https://thumbs.gfycat.com/" + id + "-size_restricted.gif"
 }
@@ -376,15 +379,14 @@ function copyCurrentUrl() {
 }
 
 function reportImage() {
-    var response = confirm("Are you sure you want to report this image? If you press \"OK\" the current images URL will be copied to your clipboard, and you will be redirected to imgurs removal request page.")
+    if (currentId == "") {
+        alert("No image to report")
+        return
+    }
+    var response = confirm("Are you sure you want to report this image? If you press \"OK\" you will be redirected to the gfycat page for this image, once there, click the 3 dots below the gif to report it")
 
     if (response) {
-        if (copyCurrentUrl()) {
-            window.open("https://imgur.com/removalrequest", '_blank')
-        } else {
-            alert("Failed to copy current URL");
-        }
-
+        window.open(getUrl(currentId, "page"))
     }
 }
 
