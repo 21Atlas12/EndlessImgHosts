@@ -142,7 +142,7 @@ async function getNewImage() {
 }
 
 async function getUrl(id, asThumbnail) {
-    url = "https://api.redgifs.com/v2/gifs/" + id
+    url = "https://api.redgifs.com/v2/gifs/" + id.toLowerCase()
     let requestPromise = new Promise(async function imgPromise(resolve, reject) {
         fetch(url, {
             headers: {'Authorization': "Bearer " + await getToken()}

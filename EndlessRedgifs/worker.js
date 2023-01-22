@@ -64,7 +64,7 @@ function getManyIds(amt) {
 }
 
 function getApiUrl(id) {
-    return "https://api.redgifs.com/v2/gifs/" + id
+    return "https://api.redgifs.com/v2/gifs/" + id.toLowerCase()
 }
 
 function testUrl(url) {
