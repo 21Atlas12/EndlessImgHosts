@@ -1037,7 +1037,7 @@ Lowchen
 Lunamoth
 Lungfish
 Lynx
-Lynxã‚â 
+Lynx
 Macaque
 Macaw
 Macropod
@@ -1107,7 +1107,7 @@ Monarch
 Mongoose
 Mongrel
 Monkey
-Monkfishã‚â 
+Monkfish
 Monoclonius
 Montanoceratops
 Moorhen
@@ -1138,7 +1138,7 @@ Mustang
 Mutt
 Myna
 Mynah
-Myotisã‚â 
+Myotis
 Nabarlek
 Nag
 Naga
@@ -1223,7 +1223,7 @@ Oxen
 Oxpecker
 Oyster
 Ozarkbigearedbat
-Pacaã‚â 
+Paca
 Pachyderm
 Pacificparrotlet
 Paddlefish
@@ -1256,7 +1256,7 @@ Pigeon
 Piglet
 Pika
 Pike
-Pikeperchã‚â 
+Pikeperch
 Pilchard
 Pinemarten
 Pinkriverdolphin
@@ -1378,7 +1378,7 @@ Rooster
 Rottweiler
 Sable
 Sableantelope
-Sablefishã‚â 
+Sablefish
 Saiga
 Sakimonkey
 Salamander
@@ -1557,7 +1557,7 @@ Titi
 Titmouse
 Toad
 Toadfish
-Tomtitã‚â 
+Tomtit
 Topi
 Tortoise
 Toucan
