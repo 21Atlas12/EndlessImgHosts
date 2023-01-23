@@ -388,9 +388,10 @@ function copyCurrentUrl() {
     if (!controlsDisabled) {
         var label = document.getElementById("copyPrompt")
         var success = true
+        var url = "https://redgifs.com/watch/" + currentId
 
         try {
-            navigator.clipboard.writeText(currentUrl)
+            navigator.clipboard.writeText(url)
             label.style.color = "greenyellow"
             label.innerHTML = "copied!"
         } catch (error) {
