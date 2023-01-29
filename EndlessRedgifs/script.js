@@ -33,9 +33,9 @@ function setup() {
     }
 
     //setup listeners
-    document.addEventListener('touchstart', handleTouchStart, false);        
+    document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
-    
+
     threadPicker.addEventListener("input", readThreadCount)
     document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === "visible") {
@@ -101,7 +101,7 @@ async function getNewImage() {
     for (let i = 0; i < (threadCount); i++) {
         var newWorker = new Worker("worker.js")
         newWorker.addEventListener("message", function (msg) {
-            var data = msg.data            
+            var data = msg.data
 
             switch (true) {
                 case data.startsWith("@"):
@@ -125,7 +125,7 @@ async function getNewImage() {
 
                     disableControls(false)
                     label.innerHTML = "click to copy"
-                    
+
                     pushContent(data)
 
                     if (playNotif) {
@@ -145,28 +145,28 @@ async function getUrl(id, asThumbnail) {
     url = "https://api.redgifs.com/v2/gifs/" + id.toLowerCase()
     let requestPromise = new Promise(async function imgPromise(resolve, reject) {
         fetch(url, {
-            headers: {'Authorization': "Bearer " + await getToken()}
+            headers: { 'Authorization': "Bearer " + await getToken() }
         })
-        .then(response => {
-            if (response.status != 200) {                
-                reject()
-                return
-            }            
-            response.text()
-            .then(data => {
-                var urls = JSON.parse(data).gif.urls
-
-                if (asThumbnail) {
-                    resolve(urls.poster)
-                } else {
-                    if (sdVideo) {
-                        resolve(urls.sd)
-                    } else {
-                        resolve(urls.hd)
-                    }
+            .then(response => {
+                if (response.status != 200) {
+                    reject()
+                    return
                 }
+                response.text()
+                    .then(data => {
+                        var urls = JSON.parse(data).gif.urls
+
+                        if (asThumbnail) {
+                            resolve(urls.poster)
+                        } else {
+                            if (sdVideo) {
+                                resolve(urls.sd)
+                            } else {
+                                resolve(urls.hd)
+                            }
+                        }
+                    })
             })
-        })
     });
 
     return requestPromise;
@@ -186,17 +186,17 @@ async function getToken() {
 function refreshToken() {
     let requestPromise = new Promise(async function imgPromise(resolve, reject) {
         fetch("https://api.redgifs.com/v2/auth/temporary")
-        .then(response => {
-            if (response.status != 200) {                
-                reject()
-                return
-            }            
-            response.text()
-            .then(data => {
-                var respData = JSON.parse(data)
-                resolve(respData.token)
+            .then(response => {
+                if (response.status != 200) {
+                    reject()
+                    return
+                }
+                response.text()
+                    .then(data => {
+                        var respData = JSON.parse(data)
+                        resolve(respData.token)
+                    })
             })
-        })
     });
 
     return requestPromise;
@@ -214,7 +214,7 @@ var currentScaling = scalingTypes.fit
 async function pushContent(id) {
     currentId = id
     imgHolder.style.display = "none"
-    vidHolder.setAttribute("src", await getUrl(currentId)) 
+    vidHolder.setAttribute("src", await getUrl(currentId))
     vidHolder.style.display = ""
 
     idLabel.innerHTML = "ID: " + currentId
@@ -256,7 +256,7 @@ const historyBuffer = []
 
 function loadHistory(historyIndex) {
     historyBuffer.splice(historyIndex, 1)
-    pushContent(historyBuffer[historyIndex])      
+    pushContent(historyBuffer[historyIndex])
 }
 
 function renderHistory() {
@@ -414,10 +414,26 @@ function reportImage() {
         alert("No image to report")
         return
     }
-    var response = confirm("Are you sure you want to report this image? If you press \"OK\" you will be redirected to the gfycat page for this image, once there, click the 3 dots below the gif to report it")
+    var response = prompt("Are you sure you want to report this image? if yes, please type the reason for your report below, and press \"OK\"")
 
     if (response) {
-        //window.open(getUrl(currentId, "page"))
+        fetch("https://reqbin.com/echo/post/json", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: `{
+                "option": 0,
+                "message": "` + response + `"
+                "email": "none",
+                "canContact": false
+              }`,
+        });
+
+        response.json().then(data => {
+            console.log(data);
+        });
     }
 }
 
