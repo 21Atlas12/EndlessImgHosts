@@ -417,7 +417,7 @@ function reportImage() {
     var response = prompt("Are you sure you want to report this image? if yes, please type the reason for your report below, and press \"OK\"")
 
     if (response) {
-        fetch("https://reqbin.com/echo/post/json", {
+        fetch("https://api.redgifs.com/v1/gifs/"+currentId+"/report-content", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
