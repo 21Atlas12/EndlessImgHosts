@@ -1,5 +1,6 @@
 var imgHolder = null
 var vidHolder = null
+var galleryLink = null
 var currentId = ""
 
 function setup() {
@@ -50,6 +51,7 @@ function setup() {
     })
 
     vidHolder = document.getElementById("currentVideo")
+    galleryLink = document.getElementById("galleryLink")
 
     document.onkeyup = function (e) {
         if (!controlsDisabled) {
@@ -125,8 +127,7 @@ async function getNewImage() {
                     disableControls(false)
                     label.innerHTML = "click to copy"
 
-                    //pushContent(data)
-                    pushContent("FocusedYummyXiphosuran")
+                    pushContent(data)
 
                     if (playNotif) {
                         notify()
@@ -154,7 +155,7 @@ async function getIdInfo(id) {
                 }
                 response.text()
                     .then(data => {
-                        var result = [null, null]
+                        var result = [null, null, false]
                         var jsonData = JSON.parse(data)
                         var urls = jsonData.gif.urls
 
@@ -167,6 +168,10 @@ async function getIdInfo(id) {
                         var urlNoQuery = result[0].substring(0, result[0].indexOf("?"))
                         var extension = urlNoQuery.substring(urlNoQuery.lastIndexOf(".") + 1, urlNoQuery.length)
                         result[1] = extension
+
+                        if (jsonData.gif.gallery) {
+                            result[2] = true
+                        }
 
                         resolve(result)
                     })
@@ -249,6 +254,13 @@ async function pushContent(id) {
         vidHolder.pause()
         imgHolder.setAttribute("src", contentInfo[0])
         imgHolder.style.display = ""
+    }
+
+    if (contentInfo[2]) {
+        galleryLink.style.display = ""
+        galleryLink.href = "https://redgifs.com/watch/" + currentId
+    } else {
+        galleryLink.style.display = "none"
     }
 
     idLabel.innerHTML = "ID: " + currentId

@@ -177,7 +177,15 @@ p {
     max-height: 90px;
 }
 
+#galleryLink {
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #currentContent {
+    display: flex;
+    flex-direction: column;    
     padding-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
