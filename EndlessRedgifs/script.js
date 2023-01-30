@@ -44,7 +44,6 @@ function setup() {
     })
 
     imgHolder = document.getElementById("currentImage");
-    imgHolder.crossOrigin = "anonymous";
 
     imgHolder.addEventListener("load", () => {
         setupScaling()
@@ -126,7 +125,8 @@ async function getNewImage() {
                     disableControls(false)
                     label.innerHTML = "click to copy"
 
-                    pushContent(data)
+                    //pushContent(data)
+                    pushContent("FocusedYummyXiphosuran")
 
                     if (playNotif) {
                         notify()
@@ -141,7 +141,7 @@ async function getNewImage() {
     })
 }
 
-async function getUrl(id, asThumbnail) {
+async function getIdInfo(id) {
     url = "https://api.redgifs.com/v2/gifs/" + id.toLowerCase()
     let requestPromise = new Promise(async function imgPromise(resolve, reject) {
         fetch(url, {
@@ -154,17 +154,42 @@ async function getUrl(id, asThumbnail) {
                 }
                 response.text()
                     .then(data => {
-                        var urls = JSON.parse(data).gif.urls
+                        var result = [null, null]
+                        var jsonData = JSON.parse(data)
+                        var urls = jsonData.gif.urls
 
-                        if (asThumbnail) {
-                            resolve(urls.poster)
+                        if (sdVideo) {
+                            result[0] = urls.sd
                         } else {
-                            if (sdVideo) {
-                                resolve(urls.sd)
-                            } else {
-                                resolve(urls.hd)
-                            }
+                            result[0] = urls.hd
                         }
+
+                        var urlNoQuery = result[0].substring(0, result[0].indexOf("?"))
+                        var extension = urlNoQuery.substring(urlNoQuery.lastIndexOf(".") + 1, urlNoQuery.length)
+                        result[1] = extension
+
+                        resolve(result)
+                    })
+            })
+    });
+
+    return requestPromise;
+}
+
+async function getThumbnailUrl(id) {
+    url = "https://api.redgifs.com/v2/gifs/" + id.toLowerCase()
+    let requestPromise = new Promise(async function imgPromise(resolve, reject) {
+        fetch(url, {
+            headers: { 'Authorization': "Bearer " + await getToken() }
+        })
+            .then(response => {
+                if (response.status != 200) {
+                    reject()
+                    return
+                }
+                response.text()
+                    .then(data => {
+                        resolve(JSON.parse(data).gif.urls.poster)
                     })
             })
     });
@@ -213,9 +238,18 @@ var currentScaling = scalingTypes.fit
 
 async function pushContent(id) {
     currentId = id
-    imgHolder.style.display = "none"
-    vidHolder.setAttribute("src", await getUrl(currentId))
-    vidHolder.style.display = ""
+    contentInfo = await getIdInfo(currentId)
+
+    if (contentInfo[1] == "mp4") {
+        imgHolder.style.display = "none"
+        vidHolder.setAttribute("src", contentInfo[0])
+        vidHolder.style.display = ""
+    } else {
+        vidHolder.style.display = "none"
+        vidHolder.pause()
+        imgHolder.setAttribute("src", contentInfo[0])
+        imgHolder.style.display = ""
+    }
 
     idLabel.innerHTML = "ID: " + currentId
     pushHistory(currentId)
@@ -261,7 +295,7 @@ function loadHistory(historyIndex) {
 
 function renderHistory() {
     historyBuffer.forEach(async function (contentInfo, index) {
-        thumbnailUrl = await getUrl(contentId, true)
+        thumbnailUrl = await getThumbnailUrl(id)
         var elementId = "pastImg" + (index + 1)
         var contentId = (contentInfo.split(";"))[0]
         document.getElementById(elementId).setAttribute("src", thumbnailUrl)
@@ -417,7 +451,7 @@ function reportImage() {
     var response = prompt("Are you sure you want to report this image? if yes, please type the reason for your report below, and press \"OK\"")
 
     if (response) {
-        fetch("https://api.redgifs.com/v1/gifs/"+currentId+"/report-content", {
+        fetch("https://api.redgifs.com/v1/gifs/" + currentId + "/report-content", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
