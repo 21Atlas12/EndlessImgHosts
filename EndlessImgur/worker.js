@@ -24,6 +24,7 @@ async function workerGetValidId() {
                     await testUrl(videoUrl).then(
                         function fulfilled() {
                             idMime = "mp4"
+                            //todo dont return MP4 for gifs
                         },
 
                         function rejected() {

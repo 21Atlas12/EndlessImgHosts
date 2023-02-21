@@ -1,0 +1,272 @@
+@font-face {
+    font-family: 'Minecrafter';
+    src: url('res/Minecrafter.woff2') format('woff2');
+  }
+
+* {
+    box-sizing: border-box;
+    font-family: Verdana;
+}
+svg{
+    width: 100%;
+    height: 100%;
+    pointer-events:none;
+}
+path{
+    pointer-events:all;
+}
+html, body {
+    display:flex;
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    overflow:hidden;
+}
+:root{
+    --bladeWidth: 6vw;
+    --bladeNum: 5;
+    --bgColorPage0: rgba(228, 99, 99, 0.8);
+    --bgColorPage1: rgba(200, 160, 240, 0.8);
+    --bgColorPage2:rgba(99, 187, 255, 0.8);
+    --bgColorPage3:rgba(211, 97, 196, 0.8);
+
+    --pageFadeTime: 200ms;
+    --pageFadeDelay: 300ms;
+    --pageAnimationDelay: 200ms;
+    --pageAnimationTime: 0.3s;
+    --slideTime: 0.3s;
+}
+#backgroundVideo{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+#backgroundColor{
+    width: 100vw; height: 100vh;
+    transition: background-color ease 1s;
+}
+#backgroundColor.page0{
+    background-color: var(--bgColorPage0);
+}
+#backgroundColor.page1{
+    background-color: var(--bgColorPage1);
+}
+#backgroundColor.page2{
+    background-color: var(--bgColorPage2);
+}
+#backgroundColor.page3{
+    background-color: var(--bgColorPage3);
+}
+#bladeRunnerLeft{
+    display:flex; position:relative;
+    width:var(--bladeWidth);
+    height:100vh;
+    margin-right: -2.3%;
+}
+#bladeRunnerRight{
+    display:flex; position:relative;
+    width:var(--bladeWidth);
+    height:100vh;
+    justify-self:flex-end;
+    margin-left: -2.3%;
+}
+#bladesContainer{
+    display:flex;
+    flex-direction:row;
+    position:absolute;
+    width:100vw;
+    height:100vh;
+}
+div.bladeTab{
+    display:flex;
+    position:relative;
+    flex-shrink:0;
+    z-index: 10;
+    width: var(--bladeWidth);
+    height: 100vh;
+    border-style: none;
+    align-items: center;
+    writing-mode:vertical-lr;
+    text-orientation:sideways;
+    font-size:2rem;
+    color:black;
+    user-select:none;
+    pointer-events:none;
+    fill:#aaa;
+}
+.bladeTab.left{
+    margin-right:-2%;
+}
+.bladeTab.left > :not(.slider){
+    animation: bladeFade forwards var(--pageAnimationTime);
+}
+.bladeTab.right > :not(.slider){
+    animation: bladeFade2 forwards var(--pageAnimationTime);
+}
+@keyframes bladeFade{
+    0% {opacity: 0;}
+    90%{opacity: 0;}
+}
+@keyframes bladeFade2{
+    0% {opacity: 0;}
+    90%{opacity: 0;}
+}
+.bladeTab.left .right{
+    visibility:collapse;
+}
+.bladeTab.active{
+    fill:none;
+    margin-right:auto;
+}
+.bladeTab.active .slider{
+    opacity:0;
+    transition: opacity 100ms linear 1s;
+}
+.bladeTab.right .left{
+    visibility:collapse;
+}
+div.bladeTab.right{
+    margin-left:-2%;
+}
+.bladeTab > p{
+    position:absolute;
+    pointer-events:none;
+    height:100%;
+    width:100%;
+    text-align:left;
+    top:18%;
+    margin:0;
+    font-size:calc(var(--bladeWidth) / 5);
+    filter: drop-shadow(0px 1px 01px white);
+}
+.bladeTab.left > p{
+    left:50%;
+}
+.bladeTab.right > p{
+    left:35%;
+}
+.slider{
+    z-index:-1;
+    opacity: 0;
+    width:var(--bladeWidth); height:100vh;
+    position:absolute;
+    pointer-events:none;
+}
+.slider path{
+    pointer-events:none;
+}
+.slider.right{
+    opacity:1;
+    animation: slideRight forwards var(--slideTime);
+}
+.slider.left{
+    opacity:1;
+    animation: slideLeft forwards var(--slideTime);
+}
+@keyframes slideRight{
+    0% {transform:translatex(-55vw)}
+}
+@keyframes slideLeft{
+    0% {transform:translatex(55vw)}
+}
+.slider.right path{
+    animation: slideRightPath forwards var(--slideTime);
+}
+.slider.left path{
+    animation: slideLeftPath forwards var(--slideTime);
+}
+@keyframes slideRightPath{
+    100% {d: path("M82 720S56 540 56 360 82 0 82 0H26S0 180 0 360s26 360 26 360Z");}
+    0%{d: path("M56 720s26-180 26-360S56 0 56 0H0s26 180 26 360S0 720 0 720Z")}
+}
+@keyframes slideLeftPath{
+    0% {d: path("M82 720S56 540 56 360 82 0 82 0H26S0 180 0 360s26 360 26 360Z");}
+    100%{d: path("M56 720s26-180 26-360S56 0 56 0H0s26 180 26 360S0 720 0 720Z")}
+}
+/*bladeTab Z-indices*/
+#tab1.bladeTab.right{
+    z-index:4;
+}
+#tab2.bladeTab.right{
+    z-index:3;
+}
+#tab3.bladeTab.right{
+    z-index:2;
+}
+#tab4.bladeTab.right{
+    z-index:1;
+}
+/* page positioning*/
+#pageContainer{
+    display:flex; position:absolute; flex-grow:1;
+    height:100vh;
+    margin: 0 var(--bladeWidth) 0 var(--bladeWidth);
+}
+.spacer{
+    width:var(--bladeWidth);
+}
+#pageViewBox{
+    flex-grow:1;
+    transition:order 0s linear 300ms;
+    order:2;
+    margin-inline:-1.5%;
+}
+.page{
+    display:block; position:absolute;
+    opacity: 0;
+    transition:opacity var(--pageFadeTime);
+}
+#pageViewBox.page0 #page0{
+    opacity: 1;
+    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+}
+#pageViewBox.page1 #page1{
+    opacity: 1;
+    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+}
+#pageViewBox.page2 #page2{
+    opacity: 1;
+    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+}
+#pageViewBox.page3 #page3{
+    opacity: 1;
+    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+}
+#pageViewBox.page4 #page4{
+    opacity: 1;
+    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+}
+#pageViewBox.page0{
+    order:1;
+ }
+#pageViewBox.page1{
+    order:2;
+}
+#pageViewBox.page2{
+    order:3;
+}
+#pageViewBox.page3{
+    order:4;
+}
+#pageViewBox.page4{
+    order:5;
+}
+.spacer:nth-child(1){
+    order:1;
+}
+.spacer:nth-child(2){
+    order:2;
+}
+.spacer:nth-child(3){
+    order:3;
+}
+.spacer:nth-child(4){
+    order:4;
+}
+.spacer:nth-child(5){
+    order:5;
+}
