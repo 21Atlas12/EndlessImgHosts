@@ -1,6 +1,9 @@
 let previousPage = 1;
 
 function selectPage(desiredPage){
+    if (document.body.classList.contains("blockAnim")) {
+        document.body.removeAttribute("class")
+    }
     console.log(previousPage," to ",desiredPage)
     assignTabClasses(desiredPage);
     theSlider(desiredPage);
@@ -37,9 +40,18 @@ function theSlider(desiredPage){
     }
 }
 function assignPageOrder(desiredPage){
+    selectedPageName = 'page'+desiredPage
+    var pages = document.querySelectorAll(".page")
     var pageViewBox = document.querySelector("#pageViewBox");
     pageViewBox.className = "";
-    pageViewBox.classList.add('page'+desiredPage);
+    pageViewBox.classList.add(selectedPageName);
+    pages.forEach(page => {
+        if (page.id != selectedPageName) {
+            page.setAttribute("style", "display: none;")
+        } else {
+            page.removeAttribute("style")
+        }
+    })
 }
 
 function assignBackgroundColor(desiredPage){

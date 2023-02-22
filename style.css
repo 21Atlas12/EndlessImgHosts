@@ -7,6 +7,13 @@
     box-sizing: border-box;
     font-family: Verdana;
 }
+
+body.blockAnim *{
+    animation-duration: 0s !important;
+    -webkit-animation-duration: 0s !important;
+    transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
+}
+
 svg{
     width: 100%;
     height: 100%;
@@ -204,6 +211,7 @@ div.bladeTab.right{
 #pageContainer{
     display:flex; position:absolute; flex-grow:1;
     height:100vh;
+    width: 58vw;
     margin: 0 var(--bladeWidth) 0 var(--bladeWidth);
 }
 .spacer{
@@ -211,14 +219,16 @@ div.bladeTab.right{
 }
 #pageViewBox{
     flex-grow:1;
+    height: 100%;
     transition:order 0s linear 300ms;
     order:2;
     margin-inline:-1.5%;
 }
 .page{
-    display:block; position:absolute;
+    display:flex; position:absolute;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    transition:opacity var(--pageFadeTime);
 }
 #pageViewBox.page0 #page0{
     opacity: 1;
