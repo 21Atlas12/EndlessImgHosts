@@ -231,25 +231,33 @@ div.bladeTab.right{
     opacity: 0;
 }
 #pageViewBox.page0 #page0{
-    opacity: 1;
-    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+    opacity: 0;
+    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation-fill-mode: forwards;
 }
 #pageViewBox.page1 #page1{
-    opacity: 1;
-    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+    opacity: 0;
+    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation-fill-mode: forwards;
 }
 #pageViewBox.page2 #page2{
-    opacity: 1;
-    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+    opacity: 0;
+    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation-fill-mode: forwards;
 }
 #pageViewBox.page3 #page3{
-    opacity: 1;
-    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+    opacity: 0;
+    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation-fill-mode: forwards;
 }
 #pageViewBox.page4 #page4{
-    opacity: 1;
-    transition:opacity var(--pageFadeTime) linear var(--pageFadeDelay);
+    opacity: 0;
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 #pageViewBox.page0{
     order:1;
  }
