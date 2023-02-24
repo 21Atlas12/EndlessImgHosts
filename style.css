@@ -131,7 +131,7 @@ div.bladeTab{
 }
 .bladeTab.active .slider{
     opacity:0;
-    transition: opacity 100ms linear 1s;
+    transition: opacity 100ms linear var(--slideTime);
 }
 .bladeTab.right .left{
     visibility:collapse;
