@@ -41,6 +41,11 @@ function setup() {
         notifyCheckbox.checked = false
     }
 
+    if (getQueryVariable("inframe")) {
+        document.documentElement.style.setProperty('--body', "rgb(0, 0, 0, 0");
+        document.documentElement.style.setProperty('--background', "rgb(0, 0, 0, 0");
+    }
+
     //setup listeners
     document.addEventListener('touchstart', handleTouchStart, false);        
     document.addEventListener('touchmove', handleTouchMove, false);
@@ -467,6 +472,17 @@ function arraysIdentical(a, b) {
 function showErrorToUser(msg) {
     window.alert(msg);
     throw new Error(msg);
+}
+
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
 }
 
 //#endregion

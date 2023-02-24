@@ -182,6 +182,10 @@ p {
     max-height: 90px;
 }
 
+.transparent {
+    opacity: 0;
+}
+
 #currentContent {
     padding-bottom: 30px;
     margin-left: auto;
