@@ -32,11 +32,9 @@ html, body {
     --bgColorPage2:rgba(99, 187, 255, 0.8);
     --bgColorPage3:rgba(211, 97, 196, 0.8);
 
+    --viewboxWidth: 70vw;
     --pageFadeTime: 200ms;
-    --pageFadeDelay: 300ms;
-    --pageAnimationDelay: 200ms;
-    --pageAnimationTime: 0.3s;
-    --slideTime: 0.3s;
+    --pageAnimationTime: 300ms;
 }
 #backgroundVideo{
     width: 100vw;
@@ -126,7 +124,7 @@ div.bladeTab{
 }
 .bladeTab.active .slider{
     opacity:0;
-    transition: opacity 100ms linear var(--slideTime);
+    transition: opacity 100ms linear var(--pageAnimationTime);
 }
 .bladeTab.right .left{
     visibility:collapse;
@@ -163,23 +161,23 @@ div.bladeTab.right{
 }
 .slider.right{
     opacity:1;
-    animation: slideRight forwards var(--slideTime);
+    animation: slideRight forwards var(--pageAnimationTime);
 }
 .slider.left{
     opacity:1;
-    animation: slideLeft forwards var(--slideTime);
+    animation: slideLeft forwards var(--pageAnimationTime);
 }
 @keyframes slideRight{
-    0% {transform:translatex(-55vw)}
+    0% {transform:translatex(calc(-1 * var(--viewboxWidth)))}
 }
 @keyframes slideLeft{
-    0% {transform:translatex(55vw)}
+    0% {transform:translatex(var(--viewboxWidth))}
 }
 .slider.right path{
-    animation: slideRightPath forwards var(--slideTime);
+    animation: slideRightPath forwards var(--pageAnimationTime);
 }
 .slider.left path{
-    animation: slideLeftPath forwards var(--slideTime);
+    animation: slideLeftPath forwards var(--pageAnimationTime);
 }
 @keyframes slideRightPath{
     100% {d: path("M82 720S56 540 56 360 82 0 82 0H26S0 180 0 360s26 360 26 360Z");}
@@ -214,7 +212,7 @@ div.bladeTab.right{
 #pageViewBox{
     display:flex; flex-grow:1;
     height: 100%;
-    transition:order 0s linear 300ms;
+    transition:order 0s linear var(--pageAnimationTime);
     order:2;
 }
 .page{
@@ -224,27 +222,27 @@ div.bladeTab.right{
 }
 #pageViewBox.page0 #page0{
     opacity: 0;
-    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation: var(--pageFadeTime) linear var(--pageAnimationTime) fadeIn;
     animation-fill-mode: forwards;
 }
 #pageViewBox.page1 #page1{
     opacity: 0;
-    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation: var(--pageFadeTime) linear var(--pageAnimationTime) fadeIn;
     animation-fill-mode: forwards;
 }
 #pageViewBox.page2 #page2{
     opacity: 0;
-    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation: var(--pageFadeTime) linear var(--pageAnimationTime) fadeIn;
     animation-fill-mode: forwards;
 }
 #pageViewBox.page3 #page3{
     opacity: 0;
-    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation: var(--pageFadeTime) linear var(--pageAnimationTime) fadeIn;
     animation-fill-mode: forwards;
 }
 #pageViewBox.page4 #page4{
     opacity: 0;
-    animation: var(--pageFadeTime) linear var(--pageFadeDelay) fadeIn;
+    animation: var(--pageFadeTime) linear var(--pageAnimationTime) fadeIn;
     animation-fill-mode: forwards;
 }
 
