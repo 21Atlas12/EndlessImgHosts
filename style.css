@@ -116,7 +116,7 @@ div.bladeTab{
     90%{opacity: 0;}
 }
 .bladeTab.left .right{
-    visibility:collapse;
+    display:none;
 }
 .bladeTab.active{
     fill:none;
@@ -127,7 +127,7 @@ div.bladeTab{
     transition: opacity 100ms linear var(--pageAnimationTime);
 }
 .bladeTab.right .left{
-    visibility:collapse;
+    display:none;
 }
 div.bladeTab.right{
     margin-left:-2%;
