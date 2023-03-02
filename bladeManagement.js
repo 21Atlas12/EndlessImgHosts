@@ -1,12 +1,14 @@
 let previousPage = 1;
+let BladeSwitchSound = "./res/tab_Switch.mp3"
+let BladeSwitchSoundPlayer = new Audio(BladeSwitchSound);
 
 function selectPage(desiredPage){
     if (document.body.classList.contains("blockAnim")) {
         document.body.removeAttribute("class")
     }
-    var notifSound = "./res/tab_Switch.wav"
-    var audio = new Audio(notifSound);
-    audio.play();
+    if (previousPage != desiredPage) {
+        BladeSwitchSoundPlayer.play()
+    }
     console.log(previousPage," to ",desiredPage)
     assignTabClasses(desiredPage);
     theSlider(desiredPage);
