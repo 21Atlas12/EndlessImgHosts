@@ -1,6 +1,7 @@
 let previousPage = 1;
 let BladeSwitchSound = "./res/tab_Switch.mp3"
 let BladeSwitchSoundPlayer = new Audio(BladeSwitchSound);
+BladeSwitchSoundPlayer.volume = 0.2
 
 function selectPage(desiredPage){
     if (document.body.classList.contains("blockAnim")) {
