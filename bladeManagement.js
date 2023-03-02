@@ -4,6 +4,9 @@ function selectPage(desiredPage){
     if (document.body.classList.contains("blockAnim")) {
         document.body.removeAttribute("class")
     }
+    var notifSound = "../res/tab_Switch.wav"
+    var audio = new Audio(notifSound);
+    audio.play();
     console.log(previousPage," to ",desiredPage)
     assignTabClasses(desiredPage);
     theSlider(desiredPage);

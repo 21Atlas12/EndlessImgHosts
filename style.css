@@ -31,6 +31,7 @@ html, body {
     --bgColorPage1: rgba(200, 160, 240, 0.8);
     --bgColorPage2:rgba(99, 187, 255, 0.8);
     --bgColorPage3:rgba(211, 97, 196, 0.8);
+    --bgColorPage4:rgba(10, 200, 105, 0.8);
 
     --pageFadeTime: 200ms;
     --pageFadeDelay: 300ms;
@@ -62,6 +63,9 @@ html, body {
 }
 #backgroundColor.page3{
     background-color: var(--bgColorPage3);
+}
+#backgroundColor.page4{
+    background-color: var(--bgColorPage4);
 }
 #bladeRunnerLeft{
     display:flex; position:relative;
