@@ -231,14 +231,6 @@ function pushContent(id, mime) {
     pushHistory(currentId, currentMime)
 }
 
-function pushHistory(id, mime) {
-    historyBuffer.unshift(id + ";" + mime)
-    if (historyBuffer.length > 30) {
-        historyBuffer.pop()
-    }
-    renderHistory()
-}
-
 function setupScaling() {
     imgHolder.removeAttribute("style")
     imgHolder.style.width = "100%"
@@ -264,6 +256,14 @@ function setupScaling() {
 
 //#region manage history
 const historyBuffer = []
+
+function pushHistory(id, mime) {
+    historyBuffer.unshift(id + ";" + mime)
+    if (historyBuffer.length > 30) {
+        historyBuffer.pop()
+    }
+    renderHistory()
+}
 
 function loadHistory(historyIndex) {
     var contentdata = historyBuffer[historyIndex].split(";")

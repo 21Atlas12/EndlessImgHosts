@@ -272,13 +272,6 @@ async function pushContent(id) {
     pushHistory(currentId)
 }
 
-function pushHistory(id) {
-    historyBuffer.unshift(id)
-    if (historyBuffer.length > 30) {
-        historyBuffer.pop()
-    }
-}
-
 function setupScaling() {
     imgHolder.removeAttribute("style")
     imgHolder.style.width = "100%"
@@ -305,16 +298,25 @@ function setupScaling() {
 //#region manage history
 const historyBuffer = []
 
+function pushHistory(id) {
+    historyBuffer.unshift(id)
+    if (historyBuffer.length > 30) {
+        historyBuffer.pop()
+    }
+    renderHistory()
+}
+
 function loadHistory(historyIndex) {
+    historyData = historyBuffer[historyIndex]
     historyBuffer.splice(historyIndex, 1)
-    pushContent(historyBuffer[historyIndex])
+    pushContent(historyData)
 }
 
 function renderHistory() {
-    historyBuffer.forEach(async function (contentInfo, index) {
-        thumbnailUrl = await getThumbnailUrl(id)
+    historyBuffer.forEach(async function (contentInfo, index) {        
         var elementId = "pastImg" + (index + 1)
         var contentId = (contentInfo.split(";"))[0]
+        thumbnailUrl = await getThumbnailUrl(contentId)
         document.getElementById(elementId).setAttribute("src", thumbnailUrl)
     })
 }
