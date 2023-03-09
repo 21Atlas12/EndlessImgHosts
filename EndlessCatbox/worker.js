@@ -26,13 +26,13 @@ async function workerGetValidId() {
 
     do {
         var id = generateId()
-        sendUpdateMsg(id)
         for (let i = 0; i < mimeList.length; i++) {
             mime = mimeList[i]
             var url = getUrl(id, mime)
 
             try {
 
+                sendUpdateMsg(id+"."+mime)
                 await testUrl(url).then(
                     function fulfilled() {
                         newId = id;       
@@ -114,7 +114,7 @@ function generateId() {
         var charIndex = Math.round(Math.random() * (chars.length - 1));
         id += chars.charAt(charIndex);
     } 
-    
+
     return id
 }
 
