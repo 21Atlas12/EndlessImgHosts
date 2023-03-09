@@ -131,7 +131,7 @@ function testUrl(url) {
 
         xhr.onreadystatechange = async function () {
             if (xhr.status == "403" || xhr.status == "401" || xhr.status == "429") {
-                sendErrorMsg("Imgur is unreachable, you may have been rate limited. Try changing your IP")
+                sendErrorMsg("Catbox is unreachable, you may have been rate limited. Try changing your IP")
                 self.close()
                 return
             }

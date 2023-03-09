@@ -248,7 +248,7 @@ function pushContent(id, mime) {
             downloadLink.style.display = "none"    
             vidHolder.style.display = "none"
             vidHolder.pause()    
-            imgHolder.setAttribute("src", getUrl(currentId, "png")) 
+            imgHolder.setAttribute("src", getUrl(currentId, currentMime)) 
             imgHolder.style.display = ""
             break;
 
