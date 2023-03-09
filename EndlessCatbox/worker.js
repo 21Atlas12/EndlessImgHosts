@@ -113,8 +113,8 @@ function generateId() {
     for (var i = 0; i < idLen; i++) {
         var charIndex = Math.round(Math.random() * (chars.length - 1));
         id += chars.charAt(charIndex);
-    }
-    return "v3ooyu"
+    } 
+    
     return id
 }
 
