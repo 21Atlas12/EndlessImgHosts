@@ -33,42 +33,42 @@
         
         <table border="1" id="mimeTable">
           <tr>
-            <td colspan="2"><input type="checkbox" id="imgToggle"> <label for="imgToggle">Images</label> </td>
-            <td colspan="2"><input type="checkbox" id="vidToggle"> <label for="vidToggle">Videos</label> </td>            
+            <td colspan="2"><input type="checkbox" id="imgToggle" title="Enable image search"> <label for="imgToggle" title="Enable image search">Images</label> </td>
+            <td colspan="2"><input type="checkbox" id="vidToggle" title="Enable video search"> <label for="vidToggle" title="Enable video search">Videos</label> </td>            
           </tr>
           <tr>
             <td>
-              <input type="radio" id="coreImg" name="img" checked>
-              <label for="coreImg">basic</label>
+              <input type="radio" id="coreImg" name="img" checked title="Search for jpegs and pngs">
+              <label for="coreImg" title="Search for jpgs and pngs">basic</label>
             </td>
             <td>
-              <input type="radio" id="extImg" name="img">
-              <label for="extImg">extended</label>
+              <input type="radio" id="extImg" name="img" title="On top of the types in basic, search for gif, webp, jpeg, bmp, tiff and ico files">
+              <label for="extImg" title="On top of the types in basic, search for gif, webp, jpeg, bmp, tiff and ico files">extended</label>
             </td>
             <td>
-              <input type="radio" id="coreVid" name="vid" checked>
-              <label for="coreVid">basic</label>
+              <input type="radio" id="coreVid" name="vid" checked title="Search for mp4s and webms">
+              <label for="coreVid" title="Search for mp4s and webms">basic</label>
             </td>
             <td>
-              <input type="radio" id="extVid" name="vid">
-              <label for="extVid">extended</label>
+              <input type="radio" id="extVid" name="vid" title="On top of the types in basic, search for m4v, avi, and mov files">
+              <label for="extVid" title="On top of the types in basic, search for m4v, avi, and mov files">extended</label>
             </td>
           </tr>
           <tr>
-            <td colspan="2"> <input type="checkbox" id="audioToggle"> <label for="audioToggle">Audio</label> </td>
-            <td> <input type="checkbox" id="docToggle"> <label for="docToggle">Documents</label> </td>
-            <td> <input type="checkbox" id="arcToggle"> <label for="arcToggle">Archives</label> </td>
+            <td colspan="2"> <input type="checkbox" id="audioToggle" title="Enable audio search"> <label for="audioToggle" title="Enable audio search">Audio</label> </td>
+            <td> <input type="checkbox" id="docToggle" title="Enable document search (txt, pdf, xml, json, csv, xlsx and pptx)"> <label for="docToggle" title="Enable document search (txt, pdf, xml, json, csv, xlsx and pptx)">Documents</label> </td>
+            <td> <input type="checkbox" id="arcToggle" title="Enable archive search (zip, rar, tar.gz and 7z)"> <label for="arcToggle" title="Enable archive search (zip, rar, tar.gz and 7z)">Archives</label> </td>
           </tr>
           <tr>
             <td>
-              <input type="radio" id="coreAudio" name="audio" checked>
-              <label for="coreAudio">basic</label>
+              <input type="radio" id="coreAudio" name="audio" checked title="Search for mp3s and wavs">
+              <label for="coreAudio" title="Search for mp3s and wavs">basic</label>
             </td>
             <td>
-              <input type="radio" id="extAudio" name="audio">
-              <label for="extAudio">extended</label>
+              <input type="radio" id="extAudio" name="audio" title="On top of the types in basic, search for flac, ogg, aac, midi and mid files">
+              <label for="extAudio" title="On top of the types in basic, search for flac, ogg, aac, midi and mid files">extended</label>
             </td>
-            <td> <input type="checkbox" id="scaryToggle"> <label for="scaryToggle">Scary</label> </td>
+            <td> <input type="checkbox" id="scaryToggle" title="Enable searching for files you really shouldn't be clicking (sfw, msi, sh)"> <label for="scaryToggle" title="Enable searching for files you really shouldn't be clicking (sfw, msi, sh)">Scary</label> </td> 
             <td> <button>Select all</button> </td>
           </tr>
         </table>

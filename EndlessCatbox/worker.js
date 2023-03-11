@@ -6,9 +6,9 @@ const extImgMimes = ["gif", "webp", "jpeg", "bmp", "tiff", "ico"]
 const extVidMimes = ["m4v", "avi", "mov"]
 const coreAudioMimes = ["mp3", "wav"]
 const extAudioMimes = ["flac", "ogg", "aac", "midi", "mid"]
-const docMimes = ["txt", "pdf", "docx", "xml", "json", "csv", "xlsx", "pptx"]
+const docMimes = ["txt", "pdf", "xml", "json", "csv", "xlsx", "pptx"]
 const archiveMimes = ["zip", "rar", "tar.gz", "7z"]
-const scaryMimes = ["exe", "swf", "msi", "sh"]
+const scaryMimes = ["swf", "msi", "sh"]
 
 var selectedMimes = 0
 
