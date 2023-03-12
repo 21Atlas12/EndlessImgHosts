@@ -12,7 +12,6 @@ const archiveMimes = ["zip", "rar", "tar.gz", "7z"]
 const scaryMimes = ["exe", "swf", "msi", "sh"]
 
 function setup() {
-
     //load settings
     var threadPicker = document.getElementById("threadCountPicker")
 
@@ -214,17 +213,13 @@ function getSelections() {
     return bitGroup
 }
 
-function getUrl(id, mime, asThumbnail) {
+function getUrl(id, mime) {
     var url = "https://files.catbox.moe/" + id
-    if (asThumbnail) {
-        url = url + "s"
-    }
     if (mime) {
         return url + "." + mime
     } 
 
-    return url
-    
+    return url   
 }
 
 //#endregion
@@ -240,7 +235,7 @@ var currentScaling = scalingTypes.fit
 function pushContent(id, mime) {
     currentId = id
     currentMime = mime
-    idLabel.innerHTML = "ID: " + currentId
+    idLabel.innerHTML = "ID: " + currentId + currentMime
 
     switch (true) {     
         case imgMimes.includes(currentMime):
@@ -325,8 +320,43 @@ function loadHistory(historyIndex) {
 function renderHistory() {
     historyBuffer.forEach(function (contentInfo, index) {
         var elementId = "pastImg" + (index + 1)
+        var historyButton = document.getElementById(elementId)
         var contentId = (contentInfo.split(";"))[0]
-        document.getElementById(elementId).setAttribute("src", getUrl(contentId, "png", true))
+        var contentMime = contentInfo.split(";")[1]
+        if (imgMimes.includes(contentMime)) {            
+            historyButton.removeAttribute("style")
+            historyButton.setAttribute("src", getUrl(contentId, contentMime))
+        } else {
+            historyButton.style.backgroundColor = getColourFromId(contentId)
+            historyButton.style.padding = "10px"
+            switch (true) {
+        
+                case vidMimes.includes(currentMime):
+                    historyButton.src = "res/video.svg"
+                    break;
+                
+                case audioMimes.includes(currentMime):
+                    historyButton.src = "res/music.svg"
+                    break;
+
+                case docMimes.includes(currentMime):
+                    historyButton.src = "res/document.svg"
+                    break;
+
+                case archiveMimes.includes(currentMime):
+                    historyButton.src = "res/zip.svg"
+                    break;
+
+                case scaryMimes.includes(currentMime):
+                    historyButton.src = "res/virus.svg"
+                    break;
+        
+                default: 
+                    historyButton.src = "res/idk.svg"
+                    break;
+            }
+        }
+        
     })
 }
 //#endregion
@@ -477,6 +507,27 @@ function reportImage() {
         }
 
     }
+}
+
+function getColourFromId(id) {
+    //impossible to create colours with a 0 in anyt position, even if their saturation is above 50
+    var components = []
+
+    components.push(parseInt(id.substring(0,2), 36) % 256)
+    components.push(parseInt(id.substring(2,4), 36) % 256)
+    components.push(parseInt(id.substring(4,6), 36) % 256)
+
+    console.log(components)
+
+    var scale = (255 - 90) / (255 - 0)
+    var hex= "#"
+
+    for (var i = 0; i < components.length; i++) {
+        var adjusted = Math.ceil(90 + (components[i] * scale))
+        hex += adjusted.toString(16)
+    }
+
+    return hex
 }
 
 //#endregion
