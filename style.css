@@ -27,11 +27,11 @@ html, body {
 :root{
     --bladeWidth: 6vw;
     --bladeNum: 5;
-    --bgColorPage0: rgba(228, 99, 99, 0.8);
-    --bgColorPage1: rgba(200, 160, 240, 0.8);
+    --bgColorPage0: rgba(255, 214, 101, 0.8);
+    --bgColorPage1: rgba(10, 200, 105, 0.8);
     --bgColorPage2:rgba(99, 187, 255, 0.8);
     --bgColorPage3:rgba(211, 97, 196, 0.8);
-    --bgColorPage4:rgba(10, 200, 105, 0.8);
+    --bgColorPage4:rgba(200, 160, 240, 0.8);
 
     --viewboxWidth: 70vw;
     --pageFadeTime: 200ms;
