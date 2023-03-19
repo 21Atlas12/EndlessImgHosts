@@ -235,7 +235,7 @@ var currentScaling = scalingTypes.fit
 function pushContent(id, mime) {
     currentId = id
     currentMime = mime
-    idLabel.innerHTML = "ID: " + currentId + currentMime
+    idLabel.innerHTML = "ID: " + currentId + "." + currentMime
 
     switch (true) {     
         case imgMimes.includes(currentMime):

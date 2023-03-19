@@ -9,10 +9,10 @@
 }
 
 :root {
-    --body: rgb(200, 160, 240);
+    --body: rgb(10, 200, 105);
     --background: rgb(43, 43, 43);
-    --lightAccent: rgb(229, 211, 248);
-    --darkAccent: rgb(150, 100, 240);
+    --lightAccent: rgb(137, 218, 177);
+    --darkAccent: rgb(10, 148, 79);
   }
 
 html, body {
