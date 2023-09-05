@@ -29,9 +29,8 @@ html, body {
     --bladeNum: 5;
     --bgColorPage0: rgba(255, 214, 101, 0.8);
     --bgColorPage1: rgba(10, 200, 105, 0.8);
-    --bgColorPage2:rgba(99, 187, 255, 0.8);
-    --bgColorPage3:rgba(211, 97, 196, 0.8);
-    --bgColorPage4:rgba(200, 160, 240, 0.8);
+    --bgColorPage2:rgba(211, 97, 196, 0.8);
+    --bgColorPage3:rgba(200, 160, 240, 0.8);
 
     --viewboxWidth: 70vw;
     --pageFadeTime: 200ms;
@@ -60,10 +59,7 @@ html, body {
     background-color: var(--bgColorPage2);
 }
 #backgroundColor.page3{
-    background-color: var(--bgColorPage3);
-}
-#backgroundColor.page4{
-    background-color: var(--bgColorPage4);
+    background-color: var(--bgColorPage2);
 }
 #bladeRunnerLeft{
     display:flex; position:relative;
@@ -244,11 +240,6 @@ div.bladeTab.right{
     animation: var(--pageFadeTime) linear var(--pageAnimationTime) fadeIn;
     animation-fill-mode: forwards;
 }
-#pageViewBox.page4 #page4{
-    opacity: 0;
-    animation: var(--pageFadeTime) linear var(--pageAnimationTime) fadeIn;
-    animation-fill-mode: forwards;
-}
 
 @keyframes fadeIn {
     0% { opacity: 0; }
@@ -265,9 +256,6 @@ div.bladeTab.right{
 }
 #pageViewBox.page3{
     order:4;
-}
-#pageViewBox.page4{
-    order:5;
 }
 .spacer:nth-child(1){
     order:1;
