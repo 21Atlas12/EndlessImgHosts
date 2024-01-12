@@ -149,6 +149,9 @@ async function getNewImage() {
                     if (playNotif) {
                         notify()
                     }
+                    if (auto) {
+                        getNewImage()
+                    }
             }
         })
         pool.push(newWorker)
@@ -283,6 +286,7 @@ function renderHistory() {
 //#region manage settings
 var controlsDisabled = false
 var playNotif = false
+var auto = false
 var threadCount = 1
 
 function disableControls(disable) {
@@ -314,6 +318,9 @@ function toggleIdLen() {
 function toggleNotif() {
     playNotif = document.getElementById("notifToggle").checked
     writeCookie("playNotif", playNotif)
+}
+function toggleAuto() {
+    auto = document.getElementById("autoToggle").checked
 }
 
 function showHistory(visible) {
@@ -377,6 +384,7 @@ function notify() {
         setFavicon(true)
     }
 }
+
 
 function readThreadCount() {
     var threadPicker = document.getElementById("threadCountPicker")
