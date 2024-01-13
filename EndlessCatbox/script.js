@@ -2,6 +2,15 @@ var imgHolder = null
 var vidHolder = null
 var audioHolder = null
 var downloadLink = null
+var imgToggle = null
+var allImgToggle = null
+var vidToggle = null
+var allVidToggle = null
+var audioToggle = null
+var allAudioToggle = null
+var docToggle = null
+var arcToggle = null
+var scaryToggle = null
 var currentId = ""
 var currentMime = ""
 const imgMimes = ["jpg", "png", "gif", "webp", "jpeg", "bmp", "tiff", "ico"]
@@ -74,6 +83,16 @@ function setup() {
         }
     }
 
+    imgToggle = document.getElementById("imgToggle")
+    allImgToggle = document.getElementById("extImg")
+    vidToggle = document.getElementById("vidToggle")
+    allVidToggle = document.getElementById("extVid")
+    audioToggle = document.getElementById("audioToggle")
+    allAudioToggle = document.getElementById("extAudio")
+    docToggle = document.getElementById("docToggle")
+    arcToggle = document.getElementById("arcToggle")
+    scaryToggle = document.getElementById("scaryToggle")
+
     const slider = document.getElementById("historyWheel")
     let isDown = false;
     let startX;
@@ -102,6 +121,7 @@ function setup() {
 }
 
 //#region fetching images
+var pool = []
 
 async function getNewImage() {
     disableControls(true)
@@ -115,7 +135,6 @@ async function getNewImage() {
         return
     }
 
-    var pool = []
     let idLabel = document.getElementById("idLabel")
     for (let i = 0; i < (threadCount); i++) {
         var newWorker = new Worker("worker.js")
@@ -163,21 +182,19 @@ async function getNewImage() {
     })
 }
 
+function stopSearch() {
+    pool.forEach((worker) => {
+        worker.terminate()
+    })
+    loadHistory(0)
+    disableControls(false)
+}
+
 // | Bit 1 | Bit 2  | Bit 3 | Bit 4  | Bit 5 |  Bit 6   |   Bit 7   |  Bit 8   | Bit 9 |
 // |-------|--------|-------|--------|-------|----------|-----------|----------|-------|
 // | Img   | extImg | vid   | extVid | audio | extAudio | Documents | archives | scary |
 function getSelections() {
-    var imgToggle = document.getElementById("imgToggle")
-    var allImgToggle = document.getElementById("extImg")
-    var vidToggle = document.getElementById("vidToggle")
-    var allVidToggle = document.getElementById("extVid")
-    var audioToggle = document.getElementById("audioToggle")
-    var allAudioToggle = document.getElementById("extAudio")
-    var docToggle = document.getElementById("docToggle")
-    var arcToggle = document.getElementById("arcToggle")
-    var scaryToggle = document.getElementById("scaryToggle")
-
-
+    
     var bitGroup = 0
 
     if (imgToggle.checked) {
@@ -373,10 +390,14 @@ var threadCount = 1
 function disableControls(disable) {
     if (disable) {
         controlsDisabled = true
-        document.getElementById("newImgButton").disabled = true;
+        var button = document.getElementById("newImgButton")
+        button.setAttribute("onclick", "stopSearch()");
+        button.textContent = "stop search"
     } else {
         controlsDisabled = false
-        document.getElementById("newImgButton").disabled = false;
+        var button = document.getElementById("newImgButton")
+        button.setAttribute("onclick", "getNewImage()");
+        button.textContent = "new image"
     }
 }
 
