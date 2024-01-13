@@ -75,7 +75,8 @@ function testUrl(url) {
 
         xhr.onreadystatechange = async function () {
             if (xhr.status == "403" || xhr.status == "401" || xhr.status == "429") {
-                sendErrorMsg("Imgur is unreachable, you may have been rate limited. Try changing your IP")
+                sendLoggingMsg(xhr.status)
+                sendErrorMsg("Imgur is unreachable, you may have been rate limited.  If you are in 5 digit id mode, it is becasue they still have rate limiting rules from when the archive team were downloading everything, try 7 digit mode. Try changing your IP")
                 self.close()
                 return
             }
