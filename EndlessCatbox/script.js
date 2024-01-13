@@ -186,7 +186,12 @@ function stopSearch() {
     pool.forEach((worker) => {
         worker.terminate()
     })
-    loadHistory(0)
+    if (historyBuffer.length == 0) {
+        document.getElementById("idLabel").textContent = "NO IMAGE"
+    } else {
+        loadHistory(0)
+    }
+
     disableControls(false)
 }
 
