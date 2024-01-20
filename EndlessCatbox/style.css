@@ -74,6 +74,20 @@ p {
 
 #mimeTable {
     table-layout: fixed;
+    border: 2px var(--darkAccent);
+    border-style:none;
+}
+#mimeTable > tbody > tr{
+    background-color:var(--lightAccent);
+    border-radius: 100%;
+    border-style:none;
+}
+#mimeTable > tbody > tr > td{
+    border-radius: 100%;
+    border-style:none;
+}
+#scalingRadioHolder{
+    align-self: center;
 }
 
 #td {
