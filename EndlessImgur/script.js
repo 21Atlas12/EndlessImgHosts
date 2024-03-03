@@ -174,6 +174,18 @@ function getUrl(id, mime, asThumbnail) {
     
 }
 
+function stopSearch() {
+    pool.forEach((worker) => {
+        worker.terminate()
+    })
+    if (historyBuffer.length == 0) {
+        document.getElementById("idLabel").textContent = "NO IMAGE"
+    } else {
+        loadHistory(0)
+    }
+
+    disableControls(false)
+}
 //#endregion
 
 //#region testing images
@@ -292,10 +304,14 @@ var threadCount = 1
 function disableControls(disable) {
     if (disable) {
         controlsDisabled = true
-        document.getElementById("newImgButton").disabled = true;
+        var button = document.getElementById("newImgButton")
+        button.setAttribute("onclick", "stopSearch()");
+        button.textContent = "stop search"
     } else {
         controlsDisabled = false
-        document.getElementById("newImgButton").disabled = false;
+        var button = document.getElementById("newImgButton")
+        button.setAttribute("onclick", "getNewImage()");
+        button.textContent = "new image"
     }
 }
 
