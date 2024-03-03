@@ -107,13 +107,13 @@ function setup() {
 
 //#region fetching images
 var idLen = 5;
+var pool = []
 
 async function getNewImage() {
     disableControls(true)
     var label = document.getElementById("copyPrompt")
     label.innerHTML = "searching..."
 
-    var pool = []
     let idLabel = document.getElementById("idLabel")
     for (let i = 0; i < (threadCount); i++) {
         var newWorker = new Worker("worker.js")
