@@ -356,23 +356,23 @@ function renderHistory() {
             historyButton.style.padding = "10px"
             switch (true) {
         
-                case vidMimes.includes(currentMime):
+                case vidMimes.includes(contentMime):
                     historyButton.src = "res/video.svg"
                     break;
                 
-                case audioMimes.includes(currentMime):
+                case audioMimes.includes(contentMime):
                     historyButton.src = "res/music.svg"
                     break;
 
-                case docMimes.includes(currentMime):
+                case docMimes.includes(contentMime):
                     historyButton.src = "res/document.svg"
                     break;
 
-                case archiveMimes.includes(currentMime):
+                case archiveMimes.includes(contentMime):
                     historyButton.src = "res/zip.svg"
                     break;
 
-                case scaryMimes.includes(currentMime):
+                case scaryMimes.includes(contentMime):
                     historyButton.src = "res/virus.svg"
                     break;
         
