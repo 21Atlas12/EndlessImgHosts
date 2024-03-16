@@ -543,23 +543,29 @@ function reportImage() {
 }
 
 function getColourFromId(id) {
-    //impossible to create colours with a 0 in anyt position, even if their saturation is above 50
+    // Initialze an empty array to store color components
     var components = []
 
+    // Extract the substings from the ID and covert them to decimal numbers
     components.push(parseInt(id.substring(0,2), 36) % 256)
     components.push(parseInt(id.substring(2,4), 36) % 256)
     components.push(parseInt(id.substring(4,6), 36) % 256)
 
+    // Output the comopnents to the console
     console.log(components)
 
+    // Define a scale to map the component values from a rage of 0-255 to a range of 90-255
     var scale = (255 - 90) / (255 - 0)
+    // Initialize a varable to store the final hex color value
     var hex= "#"
 
+    // Loop through each component, adjut its value based on the scale, and convert it to hexadecinal
     for (var i = 0; i < components.length; i++) {
         var adjusted = Math.ceil(90 + (components[i] * scale))
-        hex += adjusted.toString(16)
+        hex += adjusted.toString(16) // Convert the adjusted value to hexadecinal and apend it to the hex string
     }
 
+    // Return the final hex color value
     return hex
 }
 
